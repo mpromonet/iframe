@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <style>
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+                background-color: blue;
+            }
+            body {
+                display: flex;
+                flex-direction: column;
+            }
+            iframe {
+                flex: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Main page</h1>
+        <iframe id="myIframe" src="./iframe.html"></iframe>
+        <script>
+            const iframe = document.getElementById('myIframe');
+            iframe.onload = function() {
+                const resizeObserver = new ResizeObserver(entries => {
+                    for (let entry of entries) {
+                        const { width, height } = entry.contentRect;
+                        console.log(`Iframe size: ${width}px x ${height}px`);
+                        iframe.contentWindow?.postMessage({ width, height }, '*');
+                    }
+                });
+                resizeObserver.observe(iframe.contentWindow.document.body);
+            };
+        </script>
+    </body>
+</html>

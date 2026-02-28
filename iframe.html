@@ -1,0 +1,22 @@
+<html>
+<head>
+    <style>
+        body {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>iframe content</h1>
+    <p id="content"></p>
+</body>
+<script>
+    window.addEventListener('message', function(event) {
+        if (event.data && event.data.width && event.data.height) {
+            content.textContent = `Iframe size: ${event.data.width}px x ${event.data.height}px`;
+        }
+    });
+</script>
+
+</html>
