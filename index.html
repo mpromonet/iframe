@@ -18,15 +18,14 @@
     </head>
     <body>
         <h1>Main page</h1>
-        <iframe id="myIframe" src="./iframe.html"></iframe>
+        <iframe id="myIframe" src="./iframe.html" allow-same-origin></iframe>
         <script>
             const iframe = document.getElementById('myIframe');
             iframe.onload = function() {
                 const resizeObserver = new ResizeObserver(entries => {
                     for (let entry of entries) {
                         const { width, height } = entry.contentRect;
-                        console.log(`Iframe size: ${width}px x ${height}px`);
-                        iframe.contentWindow?.postMessage({ width, height }, '*');
+                        iframe.contentWindow?.postMessage({ width, height });
                     }
                 });
                 resizeObserver.observe(iframe.contentWindow.document.body);
