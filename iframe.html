@@ -4,17 +4,24 @@
         body {
             background-color: lightblue;
         }
+        #geo {
+            background-color: red;
+        }
     </style>
 </head>
 
 <body>
     <h1>iframe content</h1>
-    <p id="content"></p>
+    <p id="size"></p>
+    <div id="geo"></div>
 </body>
 <script>
     function handleMessage(event) {
-        if (event.data && event.data.width && event.data.height) {
-            content.textContent = `Iframe size: ${event.data.width}px x ${event.data.height}px`;
+        if (event?.data?.width && event?.data?.height) {
+            size.textContent = `Iframe size: ${event.data.width}px x ${event.data.height}px`;
+            geo.style.width = `${event.data.width/2}px`;
+            geo.style.height = `${event.data.height/2}px`;
+            geo.title = `Geo box: ${event.data.width/2}px x ${event.data.height/2}px`;
         }
     }
 
